@@ -18,14 +18,14 @@ class BlackjackGame:
 
     # Dealer Logic
 
-    def dealerTurn():
-        drawnCardValue = d.dealerDraw.value(deck)
-        if dealerScore < 1:
-            dealerScore = drawnCardValue
+    def dealerTurn(self):
+        drawnCardValue = d.dealerDraw.value(self.deck)
+        if self.dealerScore < 1:
+            self.dealerScore = drawnCardValue
         else:
-            dealerScore = dealerScore + drawnCardValue
+            self.dealerScore = self.dealerScore + drawnCardValue
 
-    def checkDealerBust(dealerScore):
+    def checkDealerBust(self, dealerScore):
         if dealerScore > 21:
             return True
         else:
@@ -33,15 +33,45 @@ class BlackjackGame:
 
 
      # Player Logic
-    def playerTurn():
+    def playerTurn(self):
         drawnCardValue = p.playerDraw.value(deck)
-        if playerScore < 1:
-            playerScore = drawnCardValue
+        if self.playerScore < 1:
+            self.playerScore = drawnCardValue
         else:
-            playerScore = playerScore + drawnCardValue
+            self.playerScore = self.playerScore + drawnCardValue
 
-    def checkPlayerBust(playerScore):
-        if playerScore > 21:
+    def checkPlayerBust(self):
+        if self.playerScore > 21:
+            return True
+        else:
+            return False
+        
+    def checkPlayerWin(self, playerScore, dealerScore):
+        if playerScore > dealerScore:
+            return True
+        else:
+            return False
+        
+    def checkPlayerBlackjack(self, playerScore):
+        if playerScore == 21:
+            return True
+        else:
+            return False
+        
+    def checkPlayerLose(self, playerScore, dealerScore):
+        if playerScore < dealerScore:
+            return True
+        else:
+            return False
+        
+    def checkPlayerTie(self, playerScore, dealerScore):
+        if playerScore == dealerScore:
+            return True
+        else:
+            return False
+        
+    def checkPlayerWinBlackjack(self, playerScore, dealerScore):
+        if playerScore == 21 and dealerScore != 21:
             return True
         else:
             return False
