@@ -1,9 +1,11 @@
 import tkinter as tk
+from BlackjackGame import BlackjackGame
 
 class BlackjackUI:
     def __init__(self):
+        self.game = BlackjackGame()  # Create an instance of the game logic
 
-        #UI
+        # UI
         self.root = tk.Tk()
         self.root.title("Blackjack")
         self.root.geometry("400x400")
@@ -47,6 +49,21 @@ class BlackjackUI:
         self.stand_button.grid(row=0, column=1, padx=10)
 
         self.root.mainloop()
+
+    def hit(self):
+        self.game.playerTurn()
+        self.update_ui()
+
+    def stand(self):
+        self.game.dealerTurn()
+        self.update_ui()
+
+    def update_ui(self):
+        # Update the UI elements based on the game state
+        self.player_cards.config(text=f"Player Score: {self.game.playerScore}")
+        self.dealer_cards.config(text=f"Dealer Score: {self.game.dealerScore}")
+        outcome = self.game.checkPlayerOutcome()
+        self.status_label.config(text=outcome)
 
 # Run the game
 if __name__ == "__main__":

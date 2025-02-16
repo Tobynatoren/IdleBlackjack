@@ -40,38 +40,16 @@ class BlackjackGame:
         else:
             self.playerScore = self.playerScore + drawnCardValue
 
-    def checkPlayerBust(self):
+    def checkPlayerOutcome(self):
         if self.playerScore > 21:
-            return True
+            return "Bust"
+        elif self.playerScore == 21 and self.dealerScore != 21:
+            return "Blackjack"
+        elif self.playerScore == self.dealerScore:
+            return "Tie"
+        elif self.playerScore > self.dealerScore:
+            return "Win"
         else:
-            return False
-        
-    def checkPlayerWin(self, playerScore, dealerScore):
-        if playerScore > dealerScore:
-            return True
-        else:
-            return False
-        
-    def checkPlayerBlackjack(self, playerScore):
-        if playerScore == 21:
-            return True
-        else:
-            return False
-        
-    def checkPlayerLose(self, playerScore, dealerScore):
-        if playerScore < dealerScore:
-            return True
-        else:
-            return False
-        
-    def checkPlayerTie(self, playerScore, dealerScore):
-        if playerScore == dealerScore:
-            return True
-        else:
-            return False
-        
-    def checkPlayerWinBlackjack(self, playerScore, dealerScore):
-        if playerScore == 21 and dealerScore != 21:
-            return True
-        else:
-            return False
+            return "Lose"
+
+    
