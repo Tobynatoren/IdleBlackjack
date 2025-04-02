@@ -1,55 +1,35 @@
-import tkinter as tk
-import random as r
-import Card as card
-import Deck as deck
-import Player as p
+import Deck
 import Dealer as d
-
-
+import Player as p
 
 class BlackjackGame:
-
     def __init__(self):
-        self.dealerScore = 0
-        self.playerScore = 0 
-        self.deckSize = 0
+        self.deck = Deck.Deck()
+        self.dealer = d.Dealer()
+        self.player = p.Player()
 
-
-
-    # Dealer Logic
+    def playerTurn(self):
+        return self.player.draw(self.deck)
 
     def dealerTurn(self):
-        drawnCardValue = d.dealerDraw.value(self.deck)
-        if self.dealerScore < 1:
-            self.dealerScore = drawnCardValue
-        else:
-            self.dealerScore = self.dealerScore + drawnCardValue
+        return self.dealer.draw(self.deck)
 
-    def checkDealerBust(self, dealerScore):
-        if dealerScore > 21:
-            return True
-        else:
-            return False
-
-
-     # Player Logic
-    def playerTurn(self):
-        drawnCardValue = p.playerDraw.value(deck)
-        if self.playerScore < 1:
-            self.playerScore = drawnCardValue
-        else:
-            self.playerScore = self.playerScore + drawnCardValue
+    def get_hand_value(self, hand):
+        return sum(card.value for card in hand)
 
     def checkPlayerOutcome(self):
-        if self.playerScore > 21:
+        player_score = self.get_hand_value(self.player.hand)
+        dealer_score = self.get_hand_value(self.dealer.hand)
+
+        if player_score > 21:
             return "Bust"
-        elif self.playerScore == 21 and self.dealerScore != 21:
+        elif player_score == 21:
             return "Blackjack"
-        elif self.playerScore == self.dealerScore:
-            return "Tie"
-        elif self.playerScore > self.dealerScore:
+        elif dealer_score > 21:
+            return "Dealer Busts! You Win"
+        elif player_score > dealer_score:
             return "Win"
+        elif player_score == dealer_score:
+            return "Tie"
         else:
             return "Lose"
-
-    
