@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pip install:*)",
+      "Bash(py -m pip install:*)",
+      "Bash(python -m PyInstaller:*)",
+      "Bash(taskkill:*)",
+      "Bash(nul)",
+      "Bash(timeout /t 2)",
+      "Bash(tasklist:*)",
+      "Bash(cmd.exe /c \"taskkill /F /IM IdleBlackjack.exe /T\")",
+      "Bash(powershell -Command:*)",
+      "Bash(if exist \"dist\\IdleBlackjack.exe\" del /F \"dist\\IdleBlackjack.exe\")",
+      "Bash(dir /s /b IdleBlackjack.exe 2)",
+      "Bash(findstr:*)",
+      "Bash(dir:*)",
+      "Bash(RebuildClean.bat)",
+      "Bash(cmd.exe /c RebuildClean.bat)",
+      "Bash(py -m PyInstaller:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
